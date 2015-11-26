@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "noImplicitAny": false,
+        "outDir": "./built",
+        "rootDir": ".",
+        "sourceMap": true,
+        "experimentalAsyncFunctions": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
