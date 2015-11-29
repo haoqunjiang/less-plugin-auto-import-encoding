@@ -5,41 +5,46 @@ const path = require('path');
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const babel = require('gulp-babel');
-const rename = require('gulp-rename');
+const del = require('del');
 // gulp-sourcemaps
 
+const tsOutputPath = './release';
 
-gulp.task('default', ['build', 'gen-ts-refs']);
+gulp.task('default', ['build']);
 
-gulp.task('build', ['compile-ts-babel']);
+gulp.task('watch', ['ts-babel'], () => {
+    gulp.watch('lib/*.ts', ['build']);
+});
+
+gulp.task('build', ['clean', 'compile-ts-babel', 'gen-ts-refs']);
+
+
+gulp.task('clean', (cb) => {
+    del(tsOutputPath, cb);
+});
 
 gulp.task('compile-ts-babel', () => {
     // create a project first, for incremental compilation
     const tsProject = ts.createProject(path.join(__dirname, 'tsconfig.json'));
-    const babelConfig = require('./babelrc');
+    const babelConfig = require('./package.json').babel;
 
-    return gulp.src('lib/**/*.ts', { base: './' })  // base served as rootDir in tsconfig.json
+    return gulp.src('lib/**/*.ts', { base: './lib' })  // base served as rootDir in tsconfig.json
         .pipe(ts(tsProject))
         .pipe(babel(babelConfig))
-        .pipe(rename({ dirname: 'release', extname: '.js' }))
-        .pipe(gulp.dest('.'));
-});
-
-gulp.task('watch', ['ts-babel'], () => {
-    gulp.watch('lib/*.ts', ['ts-babel']);
+        .pipe(gulp.dest(tsOutputPath));
 });
 
 gulp.task('gen-ts-refs', () => {
-    //
+    return;
 });
 
 gulp.task('tslint', () => {
-    //
+    return;
 });
 
 // this is an opt-in task.
 // since eslint only validates flow, and any syntax similarity between flow & typescript is pure coincidence.
 // so there might be some unnecessary error reports.
 gulp.task('eslint', () => {
-    //
+    return;
 });

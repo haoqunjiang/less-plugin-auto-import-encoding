@@ -3,7 +3,7 @@
         "target": "es6",
         "noImplicitAny": false,
         "outDir": "./release",
-        "rootDir": ".",
+        "rootDir": "./lib",
         "sourceMap": true,
         "experimentalAsyncFunctions": true
     },

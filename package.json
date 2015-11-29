@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "tape \"release/**/__tests__/*.spec.js\"",
-    "postinstall": "tsd install"
+    "postinstall": "tsd install",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -13,11 +14,16 @@
   },
   "author": "Haoqun Jiang <sodazju+npm@gmail.com>",
   "license": "MIT",
+  "babel": {
+    "presets": "es2015-node4"
+  },
   "dependencies": {
     "buffer-encoding": "0.0.2"
   },
   "devDependencies": {
     "babel-preset-es2015-node4": "^2.0.1",
+    "blue-tape": "^0.1.11",
+    "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.0",
     "gulp-rename": "^1.2.2",
