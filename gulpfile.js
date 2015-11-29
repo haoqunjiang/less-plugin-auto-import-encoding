@@ -16,13 +16,12 @@ gulp.task('build', ['compile-ts-babel']);
 gulp.task('compile-ts-babel', () => {
     // create a project first, for incremental compilation
     const tsProject = ts.createProject(path.join(__dirname, 'tsconfig.json'));
+    const babelConfig = require('./babelrc');
 
     return gulp.src('lib/**/*.ts', { base: './' })  // base served as rootDir in tsconfig.json
         .pipe(ts(tsProject))
-        .pipe(babel({
-            presets: 'es2015-node4'
-        }))
-        .pipe(rename({ dirname: 'built', extname: '.js' }))
+        .pipe(babel(babelConfig))
+        .pipe(rename({ dirname: 'release', extname: '.js' }))
         .pipe(gulp.dest('.'));
 });
 

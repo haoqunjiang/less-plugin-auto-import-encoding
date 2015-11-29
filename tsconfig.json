@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "es6",
         "noImplicitAny": false,
-        "outDir": "./built",
+        "outDir": "./release",
         "rootDir": ".",
         "sourceMap": true,
         "experimentalAsyncFunctions": true
