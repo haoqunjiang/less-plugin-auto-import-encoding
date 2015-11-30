@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "tape \"release/**/__tests__/*.spec.js\"",
-    "postinstall": "tsd install",
     "build": "gulp build"
   },
   "repository": {
@@ -27,6 +26,8 @@
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-tslint": "^4.0.1",
     "gulp-typescript": "^2.9.2",
     "tape": "^4.2.2",
     "tsd": "^0.6.5",
