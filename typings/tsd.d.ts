@@ -6,3 +6,4 @@
 /// <reference path="orchestrator/orchestrator.d.ts" />
 /// <reference path="q/Q.d.ts" />
 /// <reference path="tape/tape.d.ts" />
+/// <reference path="blue-tape/blue-tape.d.ts" />
