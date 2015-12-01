@@ -17,7 +17,8 @@
     "presets": "es2015-node4"
   },
   "dependencies": {
-    "buffer-encoding": "0.0.2"
+    "buffer-encoding": "0.0.2",
+    "less": "^2.5.3"
   },
   "devDependencies": {
     "babel-preset-es2015-node4": "^2.0.1",
@@ -25,11 +26,9 @@
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.0",
-    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^4.0.1",
     "gulp-typescript": "^2.9.2",
-    "tape": "^4.2.2",
     "tsd": "^0.6.5",
     "tslint": "^3.0.0",
     "typescript": "^1.6.2"
