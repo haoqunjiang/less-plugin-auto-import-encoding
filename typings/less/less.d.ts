@@ -4,21 +4,6 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 declare module Less {
-    // Promise definitions from ../es6-promise/es6-promise.d.ts
-    interface Thenable<R> {
-        then<U>(onFulfilled?: (value: R) => U | Thenable<U>,  onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
-    }
-
-    class Promise<R> implements Thenable<R> {
-        constructor(callback: (resolve : (value?: R | Thenable<R>) => void, reject: (error?: any) => void) => void);
-
-        then<U>(onFulfilled?: (value: R) => U | Thenable<U>,  onRejected?: (error: any) => U | Thenable<U>): Promise<U>;
-
-        catch<U>(onRejected?: (error: any) => U | Thenable<U>): Promise<U>;
-
-        finally<U>(finallyCallback: () => any): Promise<U>;
-    }
-
     interface RootFileInfo {
         filename: string;
         relativeUrls: boolean;
@@ -84,16 +69,54 @@ declare module Less {
         map: string;
         imports: string[];
     }
+
+
+    // interfaces for FileManager
+
+    interface LoadedFile {
+        contents: string;
+        filename: string;
+    }
+
+    interface LessError {
+        type: string;
+        message: string;
+    }
+
+    interface LoadError {
+        error: LessError;
+    }
+
+    class FileManager {
+        /**
+         * Loads a file asynchronously.
+         * Expects a promise that either rejects with an error or fulfills with an object containing a LessError object.
+         */
+        loadFile(
+            filename: string,
+            currentDirectory: string,
+            options: any,
+            environment: any,
+            callback: (err: void|LessError, LoadedFile) => void
+         ): Promise<LoadedFile>;
+
+         /**
+          * Loads a file synchronously.
+          */
+         loadFileSync(filename: string, currentDirectory: string, options: any, environment: any): LoadError|LoadedFile;
+    }
 }
 
 interface LessStatic {
     render(input: string, callback: (error: Less.RenderError, output: Less.RenderOutput) => void): void;
     render(input: string, options: Less.Options, callback: (error: Less.RenderError, output: Less.RenderOutput) => void): void;
 
-    render(input: string): Less.Promise<Less.RenderOutput>;
-    render(input: string, options: Less.Options): Less.Promise<Less.RenderOutput>;
+    render(input: string): Promise<Less.RenderOutput>;
+    render(input: string, options: Less.Options): Promise<Less.RenderOutput>;
 
     version: number[];
+
+    FileManager: typeof Less.FileManager;
 }
 
 declare module "less" {
