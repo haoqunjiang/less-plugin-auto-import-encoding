@@ -6,7 +6,7 @@
 /// <reference path="../node/node.d.ts" />
 
 declare module 'tape' {
-	export default tape;
+	export = tape;
 
 	/**
 	 * Create a new test with an optional name string and optional opts object.
