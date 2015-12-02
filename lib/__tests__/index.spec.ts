@@ -3,7 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import test from 'blue-tape';
+import * as tape from 'blue-tape';
 
 import * as less from 'less';
 import ImportEncodingFix from '../index';
@@ -16,7 +16,7 @@ const baseOptions: Less.Options = {
     ]
 };
 
-test('in gbk file, import from gbk & utf-8 files', (t: test.Test): Promise<void> => {
+tape('in gbk file, import from gbk & utf-8 files', (t: tape.Test): Promise<void> => {
     const options: Less.Options = Object.assign({
         filename: path.resolve(process.cwd(), './test-fixtures/main.gbk.less')
     }, baseOptions);
