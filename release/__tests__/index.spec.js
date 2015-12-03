@@ -10,7 +10,7 @@ var path = _interopRequireWildcard(_path);
 
 var _blueTape = require('blue-tape');
 
-var tape = _interopRequireWildcard(_blueTape);
+var _blueTape2 = _interopRequireDefault(_blueTape);
 
 var _less = require('less');
 
@@ -31,12 +31,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 const baseOptions = {
     plugins: [new _index2.default()]
 };
-tape('in gbk file, import from gbk & utf-8 files', t => {
+(0, _blueTape2.default)('in utf-8 file, import from gbk & utf-8 files', t => {
     const options = Object.assign({
-        filename: path.resolve(process.cwd(), './test-fixtures/main.gbk.less')
+        filename: path.resolve(process.cwd(), './test-fixtures/main.utf8.less')
     }, baseOptions);
     const mainGbk = (0, _bufferEncoding.convert)(fs.readFileSync(options.filename)).toString();
-    const expectedCss = (0, _bufferEncoding.convert)(fs.readFileSync('./test-fixtures/combined.gbk.less'), 'utf-8', 'gbk').toString();
+    const expectedCss = (0, _bufferEncoding.convert)(fs.readFileSync('./test-fixtures/combined.utf8.less'), 'utf-8', 'gbk').toString();
     return less.render(mainGbk, options).then(output => {
         t.comment(output.css);
         t.comment(expectedCss);

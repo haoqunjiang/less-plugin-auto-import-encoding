@@ -8,8 +8,9 @@ class LessPluginImportEncodingFix {
     constructor() {
         this.minVersion = [2, 1, 1];
     }
-    install(less, pluginManager) {}
-
+    install(less, pluginManager) {
+        //
+    }
     printUsage() {
         console.log('Not implemented yet');
     }

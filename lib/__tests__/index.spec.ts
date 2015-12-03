@@ -3,7 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import * as tape from 'blue-tape';
+import tape from 'blue-tape';
 
 import * as less from 'less';
 import ImportEncodingFix from '../index';
@@ -16,13 +16,13 @@ const baseOptions: Less.Options = {
     ]
 };
 
-tape('in gbk file, import from gbk & utf-8 files', (t: tape.Test): Promise<void> => {
+tape('in utf-8 file, import from gbk & utf-8 files', (t: tape.Test): Promise<void> => {
     const options: Less.Options = Object.assign({
-        filename: path.resolve(process.cwd(), './test-fixtures/main.gbk.less')
+        filename: path.resolve(process.cwd(), './test-fixtures/main.utf8.less')
     }, baseOptions);
 
     const mainGbk: string = convert(fs.readFileSync(options.filename)).toString();
-    const expectedCss: string = convert(fs.readFileSync('./test-fixtures/combined.gbk.less'), 'utf-8', 'gbk').toString();
+    const expectedCss: string = convert(fs.readFileSync('./test-fixtures/combined.utf8.less'), 'utf-8', 'gbk').toString();
 
     return less.render(mainGbk, options)
         .then((output: Less.RenderOutput) => {
