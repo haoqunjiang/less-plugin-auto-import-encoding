@@ -62,4 +62,3 @@ coverage
 node_modules
 
 .idea/
-release/
