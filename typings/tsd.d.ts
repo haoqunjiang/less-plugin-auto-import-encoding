@@ -7,4 +7,4 @@
 /// <reference path="q/Q.d.ts" />
 /// <reference path="tape/tape.d.ts" />
 /// <reference path="blue-tape/blue-tape.d.ts" />
-/// <reference path="buffer-encoding/buffer-encoding.d.ts" />
+/// <reference path="smart-encoding-convert/smart-encoding-convert.d.ts" />
