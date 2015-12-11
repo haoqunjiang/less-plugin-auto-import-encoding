@@ -17,6 +17,7 @@ declare module Less {
         constructor(less: LessStatic);
 
         addPreProcessor(preProcessor: PreProcessor, priority?: number): void;
+        addFileManager(fileManager: FileManager): void;
     }
 
     interface Plugin {
