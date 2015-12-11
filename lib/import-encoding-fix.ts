@@ -2,7 +2,22 @@
 
 import * as less from 'less';
 
+export interface PluginOptions {
+    preferEncoding: string;
+};
+
 export class ImportEncodingFix extends less.FileManager {
+    options: PluginOptions;
+
+    constructor(opts: PluginOptions) {
+        super();
+        this.options = opts;
+    }
+
+    supports() {}
+
+    supportsSync() {}
+
     loadFile(
         filename: string,
         currentDirectory: string,
