@@ -88,6 +88,11 @@ declare module Less {
         error: LessError;
     }
 
+    interface LoadOptions {
+        syncImport?: boolean;
+        paths?: string[];
+    }
+
     class FileManager {
         /**
          * Loads a file asynchronously.
@@ -96,9 +101,9 @@ declare module Less {
         loadFile(
             filename: string,
             currentDirectory: string,
-            options: any,
+            options: LoadOptions,
             environment: any,
-            callback: (err: void|LessError, LoadedFile) => void
+            callback: (err: void|LessError, loaded: LoadedFile) => void
          ): Promise<LoadedFile>;
 
          /**
@@ -109,15 +114,14 @@ declare module Less {
 }
 
 interface LessStatic {
+    version: number[];
+    FileManager: typeof Less.FileManager;
+
     render(input: string, callback: (error: Less.RenderError, output: Less.RenderOutput) => void): void;
     render(input: string, options: Less.Options, callback: (error: Less.RenderError, output: Less.RenderOutput) => void): void;
 
     render(input: string): Promise<Less.RenderOutput>;
     render(input: string, options: Less.Options): Promise<Less.RenderOutput>;
-
-    version: number[];
-
-    FileManager: typeof Less.FileManager;
 }
 
 declare module "less" {
