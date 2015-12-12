@@ -4,8 +4,9 @@
   "description": "",
   "main": "release/index.js",
   "scripts": {
+    "build": "gulp build",
     "test": "tape \"release/**/__tests__/*.spec.js\"",
-    "build": "gulp build"
+    "pretest": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -18,19 +19,19 @@
   },
   "dependencies": {
     "less": "^2.5.3",
-    "smart-encoding-convert": "0.0.3"
+    "smart-encoding-convert": "0.0.4"
   },
   "devDependencies": {
-    "babel-preset-es2015-node4": "^2.0.1",
+    "babel-preset-es2015-node4": "^2.0.2",
     "blue-tape": "^0.1.11",
-    "del": "^2.1.0",
+    "del": "^2.2.0",
     "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.0",
+    "gulp-babel": "^6.1.1",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-tslint": "^4.0.1",
-    "gulp-typescript": "^2.9.2",
+    "gulp-tslint": "^4.1.2",
+    "gulp-typescript": "^2.10.0",
     "tsd": "^0.6.5",
-    "tslint": "^3.0.0",
-    "typescript": "^1.6.2"
+    "tslint": "^3.2.0",
+    "typescript": "^1.7.3"
   }
 }
