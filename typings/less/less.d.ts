@@ -93,7 +93,11 @@ declare module Less {
         paths?: string[];
     }
 
-    class FileManager {
+    class AbstractFileManager {
+        isPathAbsolute(filename: string): boolean;
+    }
+
+    class FileManager extends AbstractFileManager {
         /**
          * Loads a file asynchronously.
          * Expects a promise that either rejects with an error or fulfills with an object containing a LessError object.
@@ -103,7 +107,7 @@ declare module Less {
             currentDirectory: string,
             options: LoadOptions,
             environment: any,
-            callback: (err: void|LessError, loaded: LoadedFile) => void
+            callback: (err: void|LessError, loaded: LessError|LoadedFile) => void
          ): Promise<LoadedFile>;
 
          /**
