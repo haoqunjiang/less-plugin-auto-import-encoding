@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
 
-import { createImportEncodingFix, PluginOptions } from './import-encoding-fix';
+import { createAutoImportEncoding, PluginOptions } from './auto-import-encoding';
 
 export default class LessPluginImportEncodingFix {
     options: PluginOptions;
@@ -12,8 +12,8 @@ export default class LessPluginImportEncodingFix {
 
     install(less: LessStatic, pluginManager: Less.PluginManager): void {
         /* tslint:disable variable-name */
-        const ImportEncodingFix = createImportEncodingFix(less);
-        pluginManager.addFileManager(new ImportEncodingFix(this.options));
+        const AutoImportEncoding = createAutoImportEncoding(less);
+        pluginManager.addFileManager(new AutoImportEncoding(this.options));
     }
 
     printUsage(): void {

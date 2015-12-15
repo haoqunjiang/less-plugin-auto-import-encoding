@@ -1,5 +1,5 @@
 {
-  "name": "less-plugin-import-encoding-fix",
+  "name": "less-plugin-auto-import-encoding",
   "version": "1.0.0",
   "description": "",
   "main": "release/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sodatea/less-plugin-import-encoding-fix.git"
+    "url": "git+https://github.com/sodatea/less-plugin-auto-import-encoding.git"
   },
   "author": "Haoqun Jiang <sodazju+npm@gmail.com>",
   "license": "MIT",

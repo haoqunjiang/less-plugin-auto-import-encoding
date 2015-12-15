@@ -6,13 +6,13 @@ import * as path from 'path';
 import tape from 'blue-tape';
 
 import * as less from 'less';
-import ImportEncodingFix from '../index';
+import LessPluginAutoImportEncoding from '../index';
 
 import convert from 'smart-encoding-convert';
 
 const baseOptions: Less.Options = {
     plugins: [
-        new ImportEncodingFix()
+        new LessPluginAutoImportEncoding()
     ]
 };
 

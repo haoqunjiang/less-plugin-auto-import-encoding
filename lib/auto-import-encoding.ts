@@ -12,8 +12,8 @@ export interface PluginOptions {
 };
 
 // can't decide which return type to use so as to avoid type incompatibility
-export function createImportEncodingFix(less: LessStatic): any {
-    return class ImportEncodingFix extends less.FileManager {
+export function createAutoImportEncoding(less: LessStatic): any {
+    return class AutoImportEncoding extends less.FileManager {
         options: PluginOptions;
 
         constructor(opts: PluginOptions = {}) {

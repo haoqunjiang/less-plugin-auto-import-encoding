@@ -1,4 +1,4 @@
-less-plugin-import-encoidng-fix
+less-plugin-auto-import-encoding
 ===============================
 
 **Work-in-Process**
