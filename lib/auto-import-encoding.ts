@@ -1,6 +1,7 @@
 /// <reference path="../typings/tsd.d.ts" />
 
 import * as fs from 'fs';
+// import * as fsp from 'fs-promise';
 import * as path from 'path';
 
 import * as less from 'less';
@@ -10,7 +11,22 @@ import convert from 'smart-encoding-convert';
 export interface PluginOptions {
     preferEncoding?: string;
 };
+/*
+function tryPathIndex(
+    index: number,
+    directory: string,
+    filename: string,
+    catchFunc?: (err: NodeJS.ErrnoException) => void
+): Promise<Less.LoadedFile, Less.LoadError> {
+    const fullFilename = path.join(directory, filename);
+    let p = fsp.stat(fullFilename);
 
+    p = p.then(() => {
+        return fsp.readFile()
+            .then()
+    }, catchFunc);
+}
+*/
 // can't decide which return type to use so as to avoid type incompatibility
 export function createAutoImportEncoding(less: LessStatic): any {
     return class AutoImportEncoding extends less.FileManager {
@@ -51,6 +67,7 @@ export function createAutoImportEncoding(less: LessStatic): any {
             }
 
             let fullFilename: string, filenamesTried: string[];
+            let preferEncoding = this.options.preferEncoding;
 
             return new Promise((resolve, reject) => {
                 (function tryPathIndex(i) {
@@ -67,7 +84,7 @@ export function createAutoImportEncoding(less: LessStatic): any {
                                 fs.readFile(fullFilename, (e, data) => {
                                     if (e) { reject(e); return; }
 
-                                    let contents = convert(data, { mightFrom: 'gbk' }).toString();
+                                    let contents = convert(data, { mightFrom: preferEncoding }).toString();
 
                                     resolve({
                                         contents: contents,
@@ -92,18 +109,19 @@ export function createAutoImportEncoding(less: LessStatic): any {
             options: Less.LoadOptions = {},
             environment: any
         ): Less.LoadError|Less.LoadedFile {
-            var fullFilename, paths, filenamesTried = [], isAbsoluteFilename = this.isPathAbsolute(filename) , data;
+            let fullFilename, filenamesTried = [], data;
+            let preferEncoding = this.options.preferEncoding;
             options = options || {};
 
-            paths = isAbsoluteFilename ? [""] : [currentDirectory];
-            if (options.paths) {
-                paths.push.apply(paths, options.paths);
-            }
+            let isAbsoluteFilename = this.isPathAbsolute(filename);
+
+            let paths = isAbsoluteFilename ? [''] : [currentDirectory];
+            paths = paths.concat(options.paths || []);
             if (!isAbsoluteFilename && paths.indexOf('.') === -1) {
                 paths.push('.');
             }
 
-            var err, result;
+            let err, result;
             for (var i = 0; i < paths.length; i++) {
                 try {
                     fullFilename = filename;
@@ -119,15 +137,14 @@ export function createAutoImportEncoding(less: LessStatic): any {
             }
 
             if (!fullFilename) {
-                err = { type: 'File', message: "'" + filename + "' wasn't found. Tried - " + filenamesTried.join(",") };
+                err = { type: 'File', message: `'${filename}' wasn't found. Tried - ${filenamesTried.join(',')}` };
                 result = { error: err };
             } else {
-                data = fs.readFileSync(fullFilename, 'utf-8');
+                data = convert(fs.readFileSync(fullFilename), { mightFrom: preferEncoding });
                 result = { contents: data, filename: fullFilename};
             }
 
             return result;
-
         };
     };
 }

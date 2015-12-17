@@ -12,7 +12,7 @@ import convert from 'smart-encoding-convert';
 
 const baseOptions: Less.Options = {
     plugins: [
-        new LessPluginAutoImportEncoding()
+        new LessPluginAutoImportEncoding({ preferEncoding: 'gbk' })
     ]
 };
 
