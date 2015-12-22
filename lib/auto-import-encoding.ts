@@ -9,7 +9,7 @@ import * as less from 'less';
 import convert from 'smart-encoding-convert';
 
 export interface PluginOptions {
-    preferEncoding?: string;
+    preferredEncoding?: string;
 };
 
 // can't decide which return type to use so as to avoid type incompatibility
@@ -68,11 +68,11 @@ export function createAutoImportEncoding(less: LessStatic): any {
                 });
             });
 
-            let preferEncoding = this.options.preferEncoding;
+            let preferredEncoding = this.options.preferredEncoding;
             p = p.then(() => {
                 return fsp.readFile(fullFilename);
             }).then((data) => {
-                const contents = convert(data, { mightFrom: preferEncoding }).toString();
+                const contents = convert(data, { mightFrom: preferredEncoding }).toString();
                 return {
                     contents: contents,
                     filename: fullFilename
@@ -91,7 +91,7 @@ export function createAutoImportEncoding(less: LessStatic): any {
             environment: any
         ): Less.LoadError|Less.LoadedFile {
             let fullFilename, filenamesTried = [], data;
-            let preferEncoding = this.options.preferEncoding;
+            let preferredEncoding = this.options.preferredEncoding;
             options = options || {};
 
             let isAbsoluteFilename = this.isPathAbsolute(filename);
@@ -121,7 +121,7 @@ export function createAutoImportEncoding(less: LessStatic): any {
                 err = { type: 'File', message: `'${filename}' wasn't found. Tried - ${filenamesTried.join(',')}` };
                 result = { error: err };
             } else {
-                data = convert(fs.readFileSync(fullFilename), { mightFrom: preferEncoding });
+                data = convert(fs.readFileSync(fullFilename), { mightFrom: preferredEncoding });
                 result = { contents: data, filename: fullFilename};
             }
 
