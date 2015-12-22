@@ -1,5 +1,4 @@
-less-plugin-auto-import-encoding
-===============================
+# less-plugin-auto-import-encoding
 
 Fix encodings when importing from files with different encodings
 (by detecting the file encoding and convert buffers to utf-8 for less to parse).
