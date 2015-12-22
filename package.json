@@ -18,6 +18,7 @@
     "presets": "es2015-node4"
   },
   "dependencies": {
+    "fs-promise": "^0.3.1",
     "less": "^2.5.3",
     "smart-encoding-convert": "0.0.4"
   },

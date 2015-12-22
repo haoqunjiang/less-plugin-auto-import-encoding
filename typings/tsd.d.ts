@@ -8,3 +8,4 @@
 /// <reference path="tape/tape.d.ts" />
 /// <reference path="blue-tape/blue-tape.d.ts" />
 /// <reference path="smart-encoding-convert/smart-encoding-convert.d.ts" />
+/// <reference path="fs-promise/fs-promise.d.ts"/>
