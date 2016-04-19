@@ -5,7 +5,8 @@
         "outDir": "./release",
         "rootDir": "./lib",
         "sourceMap": true,
-        "experimentalAsyncFunctions": true
+        "experimentalAsyncFunctions": true,
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules"
