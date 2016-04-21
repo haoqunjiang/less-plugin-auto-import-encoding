@@ -1,5 +1,40 @@
 # less-plugin-auto-import-encoding
 
+DEPRECATED. See README for more information.
+
+This package is an incomplete implementation becasue I can't find a way to elegantly hook into other FileManager plugins with using current public API.
+
+You might need this quick and dirty way to hack less:
+
+```javascript
+const readFile = fs.readFile
+const importer = require('less').Parser.importer
+const convert = require('smart-encoding-convert').convert
+
+const preferredEncoding = 'GBK'
+
+fs.readFile = function(pathname, encoding, cb) {
+    if (arguments.callee.caller === importer) {
+        readFile.call(this, pathname, function(err, data) {
+            if (err) { return cb(err) }
+
+            const buf = convert(data, { mightFrom: preferredEncoding })
+            if (!buf) {
+                return cb(new Error('decode error'))
+            }
+
+            cb(null, buf)
+        });
+    } else {
+        return readFile.apply(this, arguments)
+    }
+};
+```
+
+
+
+-----------------------
+
 Fix encodings when importing from files with different encodings
 (by detecting the file encoding and convert buffers to utf-8 for less to parse).
 
